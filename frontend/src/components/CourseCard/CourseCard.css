@@ -1,0 +1,104 @@
+/* MAIN WRAPPER */
+.course-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid #eaeaea;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 160px;
+  box-sizing: border-box;
+
+  transition: 0.25s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* LEFT BLOCK */
+.card-left {
+  width: 70%;
+}
+
+.course-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.course-sub {
+  font-size: 15px;
+  margin: 6px 0 18px;
+  color: #555;
+}
+
+/* EXPLORE BUTTON (FIXED THEME) */
+.course-btn {
+  padding: 10px 22px;
+  border-radius: 28px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* JEE THEME */
+.jee {
+  background: linear-gradient(135deg, #ff7a00, #007bff);
+}
+
+/* NEET THEME */
+.neet {
+  background: linear-gradient(135deg, #00c49a, #35e1b0);
+}
+
+/* RIGHT ICON BLOCK FIXED */
+.card-right {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f7f7f7;
+  font-size: 40px;
+  opacity: 0.35;
+}
+
+/* RESPONSIVE FIX */
+@media (max-width: 700px) {
+  .course-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .card-left {
+    width: 100%;
+  }
+
+  .card-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .icon-circle {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+  }
+}

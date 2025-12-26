@@ -1,0 +1,144 @@
+.announcement-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.announcement-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.announcement-card.admin {
+  border-left-color: #4361ee;
+}
+
+.announcement-card.teacher {
+  border-left-color: #00a35c;
+}
+
+.announcement-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.announcement-icon-wrapper {
+  flex-shrink: 0;
+}
+
+.icon-bg {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.icon-bg.admin {
+  background: linear-gradient(135deg, #4361ee 0%, #5a7aff 100%);
+}
+
+.icon-bg.teacher {
+  background: linear-gradient(135deg, #00a35c 0%, #00c96d 100%);
+}
+
+.announcement-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.announcement-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.announcement-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.author-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.course-name {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.separator {
+  color: #dee2e6;
+}
+
+.timestamp {
+  color: #adb5bd;
+}
+
+.announcement-content {
+  color: #495057;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.announcement-content p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.read-more-btn {
+  background: none;
+  border: none;
+  color: #4361ee;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0 0 0;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.read-more-btn:hover {
+  color: #2a4fd6;
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .announcement-card {
+    padding: 1rem;
+  }
+
+  .announcement-title {
+    font-size: 1rem;
+  }
+
+  .announcement-info {
+    font-size: 0.8rem;
+  }
+
+  .icon-bg {
+    width: 36px;
+    height: 36px;
+  }
+}

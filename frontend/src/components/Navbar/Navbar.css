@@ -1,0 +1,252 @@
+/* ===========================
+    🟧 Navbar Styling
+=========================== */
+
+.navbar {
+  width: 100%;
+  padding: 15px 0;
+  background: #ffffff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Container */
+.nav-container {
+  width: 90%;
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ===========================
+    🔸 Logo Section
+=========================== */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-box {
+  background: #ff9800;
+  padding: 9px 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  box-shadow: 0 2px 5px rgba(255, 152, 0, 0.4);
+  transition: 0.2s ease-in-out;
+}
+
+.logo-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 7px rgba(255, 152, 0, 0.6);
+}
+
+.logo-text h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+  color: #111;
+}
+
+.logo-text span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #666;
+}
+
+/* ===========================
+    📌 Desktop Menu
+=========================== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.3s ease;
+  padding: 6px 0;
+}
+
+.nav-links a:hover {
+  color: #ff6c00;
+  border-bottom: 2px solid #ff6c00;
+}
+
+/* ===========================
+    🎯 Right Side Buttons
+=========================== */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ⭐ Student Button */
+.student-btn {
+  padding: 7px 15px;
+  border-radius: 8px;
+  border: none;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 2px 5px rgba(59, 130, 246, 0.4);
+}
+
+.student-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* ⭐ Teacher Button */
+.teacher-btn {
+  padding: 7px 15px;
+  border-radius: 8px;
+  border: none;
+  background: #337AB7;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 2px 5px rgba(51, 122, 183, 0.4);
+}
+
+.teacher-btn:hover {
+  background: #25609b;
+  transform: translateY(-2px);
+}
+
+/* ⭐ Login Button */
+.login-btn {
+  padding: 7px 18px;
+  border-radius: 8px;
+  border: none;
+  background: #ff6c00;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 2px 5px rgba(255, 108, 0, 0.4);
+}
+
+.login-btn:hover {
+  background: #e45c00;
+  transform: translateY(-2px);
+}
+
+/* 🍔 Hamburger */
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  user-select: none;
+}
+
+/* ===========================
+    📱 Mobile Menu
+=========================== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  border-left: 2px solid #ff6c00;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  transition: 0.40s ease-in-out;
+  z-index: 2000;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.mobile-menu a:hover {
+  color: #ff6c00;
+  transform: translateX(4px);
+}
+
+.close-btn {
+  font-size: 42px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  color: #ff6c00;
+  font-weight: bold;
+  align-self: flex-end;
+}
+
+/* ===========================
+    📌 Responsive
+=========================== */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+}
+
+/* MOBILE FIX */
+@media (max-width: 480px) {
+  .nav-container {
+    flex-direction: column;
+    /* Stack elements vertically */
+    align-items: flex-start;
+    gap: 10px;
+    /* Add spacing */
+  }
+
+  .nav-left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* Logo left, hamburger right */
+    align-items: center;
+  }
+
+  .nav-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    /* Teacher + Login centered */
+  }
+}
+.notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  border: 2px solid white;
+}

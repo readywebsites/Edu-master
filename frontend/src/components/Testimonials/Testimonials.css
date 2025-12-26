@@ -1,0 +1,33 @@
+.test-section {
+  padding: 50px 0;
+}
+
+.test-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+.test-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  gap: 25px;
+}
+
+.test-card {
+  flex: 1;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+.rank {
+  color: #ff7a00;
+  font-weight: 700;
+}
+.review {
+  color: #555;
+}

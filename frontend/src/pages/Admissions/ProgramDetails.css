@@ -1,0 +1,38 @@
+.program-details-page {
+  padding: 50px;
+  background: #fafafa;
+}
+
+.program-details-page h1 {
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.pd-desc {
+  margin: 20px 0;
+  width: 70%;
+  color: #444;
+}
+
+.pd-list li {
+  margin: 8px 0;
+}
+
+.pd-duration {
+  margin-top: 10px;
+  background: #fff6e9;
+  padding: 12px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.pd-btn {
+  margin-top: 25px;
+  padding: 12px 26px;
+  background: #ff7a00;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}

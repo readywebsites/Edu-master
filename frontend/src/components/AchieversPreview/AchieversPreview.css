@@ -1,0 +1,6 @@
+.achievers-preview { margin-top: 40px; }
+.achievers-preview h3 { font-size: 22px; margin-bottom: 14px; }
+.ach-grid { display:flex; gap:18px; }
+.ach-card { background: #fff; padding:14px; border-radius:10px; box-shadow:0 8px 20px rgba(2,6,23,0.04); width:220px; }
+.ach-card p { margin:6px 0 0; color:#666; font-size:14px; }
+@media(max-width:700px){ .ach-grid{overflow:auto} }

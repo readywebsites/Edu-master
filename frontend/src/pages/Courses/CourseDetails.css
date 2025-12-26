@@ -1,0 +1,85 @@
+.course-detail-page {
+  width: 85%;
+  margin: auto;
+  padding-bottom: 50px;
+}
+
+/* HEADER */
+.detail-hero {
+  padding: 60px;
+  border-radius: 20px;
+  color: white;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.detail-hero h1 {
+  font-size: 42px;
+  font-weight: 800;
+}
+
+.detail-hero p {
+  margin-top: 12px;
+  font-size: 20px;
+}
+
+/* SECTIONS */
+.detail-section {
+  margin-top: 40px;
+}
+
+.detail-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* FEATURES */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.feature-box {
+  background: #fff;
+  padding: 18px;
+  border-radius: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #eee;
+  transition: 0.2s;
+}
+
+.feature-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.feature-box .icon {
+  color: green;
+  font-size: 20px;
+}
+
+/* SYLLABUS */
+.syllabus-list {
+  display: grid;
+  gap: 25px;
+}
+
+.syllabus-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #eee;
+}
+
+.syllabus-box h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.syllabus-box ul li {
+  margin: 6px 0;
+  color: #555;
+}

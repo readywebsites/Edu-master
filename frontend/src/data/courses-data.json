@@ -1,0 +1,85 @@
+[
+  {
+    "id": 1,
+    "slug": "jee-main-advanced",
+    "category": "jee",
+    "title": "JEE Main + Advanced",
+    "subtitle": "1-Year Target Batch",
+    "gradient": "linear-gradient(135deg, #FF7A00, #007BFF)",
+    "icon": "FaAtom",
+    "features": [
+      "Complete PCM syllabus",
+      "Daily practice sheets",
+      "Advanced mock tests",
+      "Personal doubt support"
+    ],
+    "syllabus": [
+      {
+        "module": "Physics",
+        "topics": ["Kinematics", "Laws of Motion", "Electrostatics", "Modern Physics"]
+      },
+      {
+        "module": "Chemistry",
+        "topics": ["Physical Chemistry Basics", "Organic Reactions", "Periodic Table"]
+      }
+    ]
+  },
+
+  {
+    "id": 2,
+    "slug": "jee-mains-1-year",
+    "category": "jee",
+    "title": "JEE Mains (1-Year)",
+    "subtitle": "Full PCM Syllabus",
+    "gradient": "linear-gradient(135deg, #FF7A00, #007BFF)",
+    "icon": "FaCalculator",
+    "features": ["Full JEE Main syllabus", "250+ questions per chapter"],
+    "syllabus": [
+      {
+        "module": "Maths",
+        "topics": ["Algebra", "Trigonometry", "Calculus"]
+      }
+    ]
+  },
+
+  {
+    "id": 3,
+    "slug": "jee-foundation-9",
+    "category": "jee",
+    "title": "JEE Foundation Class 9",
+    "subtitle": "PCM Basics",
+    "gradient": "linear-gradient(135deg, #FF7A00, #007BFF)",
+    "icon": "FaCogs",
+    "features": ["Strong foundation building", "Olympiad Preparation"],
+    "syllabus": []
+  },
+
+  {
+    "id": 4,
+    "slug": "neet-target-batch",
+    "category": "neet",
+    "title": "NEET Target Batch",
+    "subtitle": "Complete PCB Prep",
+    "gradient": "linear-gradient(135deg, #C8FFE6, #00C49A)",
+    "icon": "FaHeartbeat",
+    "features": ["Complete PCB syllabus", "Daily MCQs", "Full NEET pattern tests"],
+    "syllabus": [
+      {
+        "module": "Biology",
+        "topics": ["Cell Biology", "Genetics", "Reproduction"]
+      }
+    ]
+  },
+
+  {
+    "id": 5,
+    "slug": "neet-foundation-10",
+    "category": "neet",
+    "title": "NEET Foundation Class 10",
+    "subtitle": "Biology + Chemistry",
+    "gradient": "linear-gradient(135deg, #C8FFE6, #00C49A)",
+    "icon": "FaDna",
+    "features": ["Early NEET prep", "Olympiad support"],
+    "syllabus": []
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "jee": {
+    "id": 1,
+    "title": "JEE Main + Advanced",
+    "subtitle": "Intensive 1–2 year training",
+    "desc": "Highly intensive program for JEE aspirants targeting IITs.",
+    "points": [
+      "Complete PCM syllabus",
+      "Advanced test series",
+      "Expert mentorship",
+      "Daily practice sheets"
+    ]
+  },
+  "neet": {
+    "id": 2,
+    "title": "NEET Target Batch",
+    "subtitle": "Complete PCB preparation",
+    "desc": "Perfect program for students targeting NEET 2025.",
+    "points": [
+      "Full PCB syllabus",
+      "Weekly mock tests",
+      "Doubt solving sessions",
+      "Assignments & PYQs"
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+.stats {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 70px 0;
+}
+
+/* ⭐ 20% MORE RIGHT SHIFT DONE */
+.stats-grid {
+  width: 90%;
+  max-width: 1300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+
+  margin-left: 180px;   /* ⬅️ SHIFTED MORE TO THE RIGHT */
+}
+
+/* CARD */
+.stat-card {
+  background: #fff;
+  padding: 35px 20px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.12);
+}
+
+/* ICON */
+.stat-icon {
+  font-size: 42px;
+  color: #ff7a00;
+  margin-bottom: 15px;
+}
+
+/* TITLE */
+.stat-card h3 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+/* SUBTEXT */
+.stat-card p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0;    /* RESET */
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    margin-left: 0;    /* RESET */
+  }
+
+  .stat-card {
+    padding: 28px 18px;
+  }
+
+  .stat-card h3 {
+    font-size: 24px;
+  }
+
+  .stat-icon {
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,42 @@
+.achievers-section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 60px auto;
+}
+
+.achievers-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.achievers-grid {
+  display: flex;
+  gap: 25px;
+}
+
+.achiever-card {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+  transition: 0.25s;
+}
+
+.achiever-card:hover {
+  transform: translateY(-6px);
+}
+
+.achiever-photo {
+  width: 90px;
+  height: 90px;
+  background: #eee;
+  border-radius: 50%;
+  margin: 10px auto 15px;
+}
+
+.achiever-card p {
+  color: #777;
+}

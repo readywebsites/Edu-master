@@ -1,0 +1,92 @@
+/* Container helper */
+.container {
+  width: 92%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* HOME MAIN */
+.home-main {
+  padding: 40px 0 80px;
+}
+
+/* WHY COMPACT */
+.why-compact {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(2,6,23,0.04);
+  margin-top: 26px;
+}
+
+.why-left h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.why-left p {
+  margin: 0;
+  color: #525a63;
+}
+
+.why-right {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.why-pill {
+  background: #fff8f2;
+  color: #ff7a00;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  border: 1px solid #ffe8d0;
+}
+
+/* SECTION BLOCK */
+.section-block {
+  margin-top: 36px;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.section-sub {
+  color: #56606b;
+  margin-bottom: 16px;
+}
+
+/* courses-preview wrapper */
+.courses-preview {
+  margin-top: 10px;
+}
+
+/* All sections get spacing */
+.section-block + .section-block {
+  margin-top: 40px;
+}
+
+/* RESPONSIVE FIX */
+@media (max-width: 900px) {
+  .why-compact {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ----------------------------------------------------
+   ⭐ STEP-5: AOS Smooth Animation Style
+-----------------------------------------------------*/
+
+.page-container [data-aos] {
+  transition: all 0.8s ease-out !important;
+  transform-origin: center;
+}

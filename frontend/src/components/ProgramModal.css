@@ -1,0 +1,53 @@
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-box {
+  width: 550px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+}
+
+.modal-box h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.modal-desc {
+  margin: 15px 0 20px;
+  color: #444;
+}
+
+.modal-list li {
+  margin: 8px 0;
+}
+
+.modal-btn {
+  background: #ff7a00;
+  padding: 10px 24px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.pop-in {
+  animation: popin 0.4s ease;
+}
+
+@keyframes popin {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

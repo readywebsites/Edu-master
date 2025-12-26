@@ -1,0 +1,278 @@
+/* =======================================
+   GLOBAL WRAPPER
+======================================= */
+.inner-wrapper {
+  padding: 40px;
+  font-family: "Poppins", sans-serif;
+  min-height: 90vh;
+  max-width: 1300px;
+  margin: auto;
+  animation: fadeIn 0.35s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Remove link underline in cards */
+.notes-card a, .notes-actions a, .assignment-upload a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+/* =======================================
+   HEADER
+======================================= */
+.inner-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.inner-icon {
+  font-size: 42px;
+  transition: 0.25s ease;
+  filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.12));
+  cursor: pointer;
+}
+
+.inner-icon:hover { 
+  transform: scale(1.13) rotate(-3deg); 
+}
+
+.inner-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.inner-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+/* =======================================
+   GRID (ALL CARDS)
+======================================= */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 26px;
+  margin-top: 20px;
+}
+
+/* =======================================
+   CARD STYLE
+======================================= */
+.notes-card {
+  background: linear-gradient(180deg, #ffffff, #f9fbff);
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid #e3e8f3;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.notes-card:hover {
+  transform: translateY(-7px);
+  border-color: #cbe3ff;
+  box-shadow: 0 10px 30px rgba(0,117,255,0.18);
+}
+
+/* =======================================
+   CARD CONTENT
+======================================= */
+.notes-info {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.notes-fileicon {
+  font-size: 40px;
+  min-width: 40px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+}
+
+.notes-heading {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.notes-sub {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* =======================================
+   BUTTONS (COMMON)
+======================================= */
+.notes-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.28s ease;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Press animation */
+.btn:active, .upload-btn:active, .send-btn:active, .upload-assign-btn:active, .submit-assign-btn:active {
+  transform: scale(0.95);
+}
+
+/* View Button */
+.view-btn {
+  background: #006dfb;
+  color: #fff;
+}
+.view-btn:hover {
+  background: #0055bf;
+  box-shadow: 0 4px 12px rgba(0,109,251,0.45);
+}
+
+/* Download Button */
+.download-btn {
+  background: #ff7b00;
+  color: #fff;
+}
+.download-btn:hover {
+  background: #e56c00;
+  box-shadow: 0 4px 12px rgba(255,123,0,0.45);
+}
+
+/* =======================================
+   DOUBT BOX
+======================================= */
+.doubt-box {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 16px;
+  border-left: 6px solid #01c6ff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  margin-bottom: 35px;
+}
+
+.doubt-box textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  min-height: 95px;
+  resize: vertical;
+  font-family: "Poppins";
+  padding: 8px 2px;
+  color: #111827;
+}
+
+/* DOUBT UPLOAD + SEND BUTTON */
+.doubt-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.upload-btn {
+  background: #e9f5ff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  color: #0064d8;
+  border: 1px solid #b8d8ff;
+}
+.upload-btn:hover { background: #d8ecff; }
+
+.send-btn {
+  background: #16a34a;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: 0.25s ease;
+}
+.send-btn:hover {
+  background: #0f7f38;
+  box-shadow: 0 4px 14px rgba(22,163,74,0.45);
+}
+
+/* =======================================
+   ASSIGNMENT UPLOAD UI
+======================================= */
+.assignment-upload {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.upload-assign-btn {
+  background: #e7ffe8;
+  color: #0b7d3b;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #9efbc5;
+  cursor: pointer;
+}
+.upload-assign-btn:hover {
+  background: #d2ffd6;
+}
+
+.submit-assign-btn {
+  background: #9333ea;
+  color: #fff;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.25s ease;
+}
+.submit-assign-btn:hover {
+  background: #7a1cc9;
+  box-shadow: 0 4px 14px rgba(147,51,234,0.45);
+}
+
+/* =======================================
+   RESPONSIVE
+======================================= */
+@media (max-width: 768px) {
+  .notes-grid { grid-template-columns: 1fr; }
+  .inner-wrapper { padding: 20px; }
+  .inner-title { font-size: 23px; }
+}
+
+@media (max-width: 480px) {
+  .notes-actions, .assignment-upload, .doubt-actions {
+    flex-direction: column;
+  }
+  .btn, .upload-assign-btn, .submit-assign-btn, .upload-btn, .send-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,34 @@
+.news-section {
+  padding: 40px 0;
+  background: #fff7ed;
+}
+
+.news-box {
+  width: 90%;
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+.news-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.news-form input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.news-form button {
+  padding: 10px 20px;
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

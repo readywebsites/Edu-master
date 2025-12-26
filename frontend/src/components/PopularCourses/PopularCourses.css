@@ -1,0 +1,37 @@
+.popular-section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+.popular-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 25px;
+}
+
+.popular-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.pop-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.06);
+  transition: 0.25s;
+}
+
+.pop-card:hover {
+  transform: translateY(-6px);
+}
+
+.pop-icon {
+  font-size: 45px;
+  margin-bottom: 12px;
+}
+
+.pop-icon.jee { color: #ff7a00; }
+.pop-icon.neet { color: #22b96a; }
