@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import CourseCard from "../CourseCard/CourseCard";
 import "./Courses.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { getCourses } from "../../services/api"; // Import the API function
+import Categories, { categoryData } from "../Categories/Categories";
 
 // Icons
 import {
@@ -28,15 +29,20 @@ const iconMap = {
 const Courses = () => {
   const [filter, setFilter] = useState("all");
   const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
+        setLoading(true);
         const response = await getCourses();
         setCourses(response.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchCourses();
@@ -47,47 +53,67 @@ const Courses = () => {
       ? courses
       : courses.filter((course) => course.category === filter);
 
+  const displayedCourses = location.pathname === "/courses"
+    ? filteredCourses
+    : filteredCourses.slice(0, 6);
+
   return (
     <section className="courses-section">
       <div className="courses-container">
 
-        {/* FILTER BUTTONS */}
+        {/* FILTER SECTION */}
         <div className="course-filter-box">
-          <button className={`filter-btn ${filter === "all" ? "active" : ""}`}
-            onClick={() => setFilter("all")}
-          >
-            All
-          </button>
 
-          <button className={`filter-btn ${filter === "jee" ? "active" : ""}`}
-            onClick={() => setFilter("jee")}
-          >
-            JEE Courses
-          </button>
-
-          <button className={`filter-btn ${filter === "neet" ? "active" : ""}`}
-            onClick={() => setFilter("neet")}
-          >
-            NEET Courses
-          </button>
-        </div>
-
-        <div className="course-grid">
-          {filteredCourses.map((course) => (
-            <div
-              key={course.id}
-              onClick={() => navigate(`/courses/${course.slug}`)}
-              style={{ cursor: "pointer" }}
+          <div className="filter-buttons">
+            <button className={`filter-btn ${filter === "all" ? "active" : ""}`}
+              onClick={() => setFilter("all")}
             >
-              <CourseCard
-                theme={course.category}
-                icon={iconMap[course.icon]}
-                title={course.title}
-                subtitle={course.subtitle}
-              />
-            </div>
-          ))}
+              All
+            </button>
+            {categoryData.map((cat) => (
+              <button key={cat.id} className={`filter-btn ${filter === cat.id ? "active" : ""}`}
+                onClick={() => setFilter(cat.id)}
+              >
+                {cat.title} Courses
+              </button>
+            ))}
+          </div>
+
+          <div className="fade-in" key={`cat-${filter}`}>
+            <Categories onCategorySelect={setFilter} currentFilter={filter} />
+          </div>
         </div>
+
+        {loading ? (
+          <div className="courses-loader-wrapper">
+            <div className="courses-spinner"></div>
+          </div>
+        ) : displayedCourses.length > 0 ? (
+          <div className="course-grid fade-in" key={`grid-${filter}`}>
+            {displayedCourses.map((course) => (
+              <div
+                key={course.id}
+                onClick={() => navigate(`/courses/${course.slug}`)}
+                style={{ cursor: "pointer" }}
+              >
+                <CourseCard
+                  theme={course.category}
+                  icon={iconMap[course.icon]}
+                  title={course.title}
+                  subtitle={course.subtitle}
+                />
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        {location.pathname !== "/courses" && (
+          <div className="view-more-wrapper">
+            <button className="view-more-btn" onClick={() => navigate("/courses")}>
+              View More
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const CategoryCard = ({ title, tags, theme, icon }) => {
+const CategoryCard = ({ title, tags, theme, icon, onClick }) => {
   return (
     <div className="category-card">
 
@@ -16,7 +16,7 @@ const CategoryCard = ({ title, tags, theme, icon }) => {
           ))}
         </div>
 
-        <button className="category-btn">
+        <button className="category-btn" onClick={onClick}>
           Explore Category →
         </button>
       </div>
@@ -24,7 +24,7 @@ const CategoryCard = ({ title, tags, theme, icon }) => {
       {/* RIGHT ICON */}
       <div className="category-right">
         <div className={`category-bg ${theme}-bg`}>
-          <img src={icon} alt="icon" />
+          {icon}
         </div>
       </div>
 

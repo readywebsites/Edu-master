@@ -1,7 +1,8 @@
 /* OUTER WRAPPER */
 .courses-section {
   width: 100%;
-  padding: 50px 0;
+  padding: 50px 0 10px 0;
+  background-color: #ffe4cc;
   display: flex;
   justify-content: center;
 }
@@ -16,8 +17,16 @@
 /* FILTER BUTTONS */
 .course-filter-box {
   display: flex;
-  gap: 15px;
+  flex-direction: column;
+  gap: 25px;
   margin-bottom: 35px;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .filter-btn {
@@ -68,6 +77,31 @@
 }
 
 
+/* VIEW MORE BUTTON */
+.view-more-wrapper {
+  text-align: center;
+  margin-top: 20px; /* Offset to balance the grid's margin-bottom */
+  margin-bottom: 20px;
+}
+
+.view-more-btn {
+  padding: 12px 32px;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #ff7a00, #ff9330);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.view-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(255, 122, 0, 0.6);
+}
+
 /* GRID (NO OVERLAP — FINAL FIXED) */
 .course-grid {
   display: grid;
@@ -80,6 +114,22 @@
   margin-bottom: 70px;
 }
 
+
+/* FADE IN ANIMATION */
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* TABLET */
 @media (max-width: 1100px) {

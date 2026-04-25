@@ -1,10 +1,13 @@
 import heroImg from "../../assets/hero.jpg";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./Hero.css";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     AOS.init({ duration: 900, once: true });
   }, []);
@@ -28,8 +31,12 @@ const Hero = () => {
 
             {/* Buttons */}
             <div className="hero-buttons">
-              <button className="btn primary">Explore Courses →</button>
-              <button className="btn outline">Get Admission</button>
+              <button className="btn primary" onClick={() => navigate("/courses")}>
+                Explore Courses →
+              </button>
+              <button className="btn outline" onClick={() => navigate("/admissions")}>
+                Get Admission
+              </button>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ export default function StudentDashboard() {
   const fetchAnnouncements = async () => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://localhost:8000/api/announcements/', {
+      const response = await fetch('http://edu.biz499.com/api/announcements/', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',

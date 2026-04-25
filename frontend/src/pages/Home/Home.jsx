@@ -5,7 +5,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Hero from "../../components/Hero/Hero";
-import Categories from "../../components/Categories/Categories";
 import Courses from "../../components/Courses/Courses";
 import Stats from "../../components/Stats/Stats";
 import Highlights from "../../components/Highlights/Highlights";
@@ -44,10 +43,6 @@ const Home = () => {
 
         <div data-aos="fade-up">
           <Highlights />
-        </div>
-
-        <div data-aos="fade-up">
-          <Categories />
         </div>
 
         <div data-aos="fade-up">

@@ -4,7 +4,12 @@ from .models import Course, CustomUser,Unit,Resource,Assignment,Announcement,Dis
 # ,Quiz,Question,Choice,Answer
 # Register your models here.
 admin.site.register(CustomUser)
-admin.site.register(Course)
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'slug')
+    prepopulated_fields = {'slug': ('title',)}
+
 admin.site.register(Unit)
 admin.site.register(Resource)
 admin.site.register(Assignment)

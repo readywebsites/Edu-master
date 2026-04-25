@@ -1,56 +1,54 @@
 import React from "react";
 import "./Categories.css";
+import CategoryCard from "./CategoryCard";
+import { useNavigate } from "react-router-dom";
 
 import { FaDna, FaAtom } from "react-icons/fa";
 
-const Categories = () => {
+export const categoryData = [
+  {
+    id: "neet",
+    title: "NEET",
+    tags: ["class 11", "class 12", "Dropper"],
+    theme: "neet",
+    icon: <FaDna size={60} color="#cc2d5a" />,
+    path: "/courses?filter=neet" // You can intercept this query param in your Courses component later
+  },
+  {
+    id: "jee",
+    title: "IIT JEE",
+    tags: ["class 11", "class 12", "Dropper"],
+    theme: "jee",
+    icon: <FaAtom size={60} color="#ff7a00" />,
+    path: "/courses?filter=jee"
+  }
+];
+
+const Categories = ({ onCategorySelect, currentFilter }) => {
+  const navigate = useNavigate();
+
+  const displayCategories = currentFilter && currentFilter !== "all"
+    ? categoryData.filter((cat) => cat.id === currentFilter)
+    : categoryData;
+
   return (
-    <div className="categories-wrapper">
-      <div className="categories-container">
-
-        {/* NEET CATEGORY */}
-        <div className="category-card">
-          <div className="category-left">
-            <h2>NEET</h2>
-
-            <div className="category-tags">
-              <span className="category-tag">class 11</span>
-              <span className="category-tag">class 12</span>
-              <span className="category-tag">Dropper</span>
-            </div>
-
-            <button className="category-btn">Explore Category →</button>
-          </div>
-
-          <div className="category-right">
-            <div className="category-bg neet-bg">
-              <FaDna size={60} color="#cc2d5a" />
-            </div>
-          </div>
-        </div>
-
-        {/* JEE CATEGORY */}
-        <div className="category-card">
-          <div className="category-left">
-            <h2>IIT JEE</h2>
-
-            <div className="category-tags">
-              <span className="category-tag">class 11</span>
-              <span className="category-tag">class 12</span>
-              <span className="category-tag">Dropper</span>
-            </div>
-
-            <button className="category-btn">Explore Category →</button>
-          </div>
-
-          <div className="category-right">
-            <div className="category-bg jee-bg">
-              <FaAtom size={60} color="#ff7a00" />
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div className="categories-container">
+        {displayCategories.map((cat) => (
+          <CategoryCard
+            key={cat.id}
+            title={cat.title}
+            tags={cat.tags}
+            theme={cat.theme}
+            icon={cat.icon}
+            onClick={() => {
+              if (onCategorySelect) {
+                onCategorySelect(cat.id);
+              } else {
+                navigate(cat.path);
+              }
+            }}
+          />
+        ))}
     </div>
   );
 };

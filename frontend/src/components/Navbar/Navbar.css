@@ -10,6 +10,12 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid transparent;
 }
 
 /* Container */
@@ -159,11 +165,47 @@
 /* ===========================
     📱 Mobile Menu
 =========================== */
+/* Dark semi-transparent overlay */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1500; /* Sit just behind the mobile menu & notifications */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Notification Sidebar Slide-in Wrapper */
+.notification-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 2000;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notification-wrapper.open {
+  transform: translateX(0);
+}
+
 .mobile-menu {
   position: fixed;
   top: 0;
-  right: -300px;
-  width: 260px;
+  right: 0;
+  transform: translateX(calc(100% + 30px)); /* Hides menu + box-shadow entirely */
+  width: max-content;
+  max-width: 85vw; /* Prevents menu from overflowing on very small screens */
   height: 100%;
   background: #fff;
   border-left: 2px solid #ff6c00;
@@ -172,12 +214,13 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
-  transition: 0.40s ease-in-out;
+  /* Smoother slide-in animation */
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2000;
 }
 
 .mobile-menu.open {
-  right: 0;
+  transform: translateX(0);
 }
 
 .mobile-menu a {
@@ -193,6 +236,25 @@
   transform: translateX(4px);
 }
 
+/* Restore button decoration for login inside the mobile menu */
+/* Using !important to ensure generic mobile link styles don't override the button design */
+.mobile-menu .login-btn {
+  background: #ff6c00 !important;
+  color: #fff !important;
+  padding: 10px 18px !important;
+  border-radius: 8px !important;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(255, 108, 0, 0.3) !important;
+  display: inline-block;
+  border: none;
+}
+
+.mobile-menu .login-btn:hover {
+  background: #e45c00 !important;
+  color: #fff !important;
+  transform: translateY(-3px) !important;
+}
+
 .close-btn {
   font-size: 42px;
   cursor: pointer;
@@ -202,10 +264,19 @@
   align-self: flex-end;
 }
 
+/* Hide mobile login/logout and notifications in the slide-in menu for screens > 500px 
+   because they are already visible in the main navbar */
+@media (min-width: 501px) {
+  .mobile-menu .login-btn,
+  .mobile-menu .mobile-nav-item {
+    display: none !important;
+  }
+}
+
 /* ===========================
     📌 Responsive
 =========================== */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .nav-links {
     display: none;
   }
@@ -216,28 +287,53 @@
 }
 
 /* MOBILE FIX */
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .nav-container {
-    flex-direction: column;
-    /* Stack elements vertically */
-    align-items: flex-start;
-    gap: 10px;
-    /* Add spacing */
-  }
-
-  .nav-left {
-    width: 100%;
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    /* Logo left, hamburger right */
     align-items: center;
   }
 
+  .nav-left {
+    width: auto;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .logo-box {
+    padding: 6px 10px;
+    font-size: 15px;
+  }
+
+  .logo-text h2 {
+    font-size: 17px;
+  }
+
+  .logo-text span {
+    font-size: 9px;
+  }
+
   .nav-right {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    /* Teacher + Login centered */
+    width: auto;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  /* Only hide the buttons in the right navbar, keep them in mobile menu */
+  .nav-right .login-btn, .nav-right .teacher-btn, .nav-right .student-btn {
+    display: none;
+  }
+
+  .menu-icon {
+    margin-left: 4px;
+    font-size: 26px;
+  }
+
+  /* Reduce the width of the login/logout button in the slide-in menu */
+  .mobile-menu .login-btn {
+    width: max-content !important;
+    align-self: flex-start !important;
+    padding: 8px 22px !important;
   }
 }
 .notification-badge {

@@ -3,7 +3,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.core.cache import cache
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from .models import CustomUser, Course, Assignment, Message, Submission, Project, ProjectMilestone, ProjectFile, Announcement, Exam, Question, Choice, ExamSubmission
 from .serializers import (
     CustomUserSerializer, 
@@ -130,6 +134,53 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     permission_classes = [AllowAny]
+
+    def list(self, request, *args, **kwargs):
+        cache_key = 'api_courses_list'
+        data = cache.get(cache_key)
+        if not data:
+            response = super().list(request, *args, **kwargs)
+            data = response.data
+            cache.set(cache_key, data, 60 * 15)
+        return Response(data)
+
+    def retrieve(self, request, *args, **kwargs):
+        pk = self.kwargs.get('pk')
+        cache_key = f'api_courses_detail_{pk}'
+        data = cache.get(cache_key)
+        if not data:
+            response = super().retrieve(request, *args, **kwargs)
+            data = response.data
+            cache.set(cache_key, data, 60 * 15)
+        return Response(data)
+
+    def invalidate_course_cache(self):
+        """Helper to clear predictable course cache keys and stats."""
+        cache.delete('api_courses_list')
+        cache.delete('admin_dashboard_stats')  # Stats count courses, so we clear it too!
+        
+        # Utilize django-redis wildcard deletion to wipe all single-course caches
+        if hasattr(cache, 'delete_pattern'):
+            cache.delete_pattern('*api_courses_detail_*')
+
+    def perform_create(self, serializer):
+        super().perform_create(serializer)
+        self.invalidate_course_cache()
+
+    def perform_update(self, serializer):
+        super().perform_update(serializer)
+        self.invalidate_course_cache()
+
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+        self.invalidate_course_cache()
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        # Allow lookup by slug if the captured URL value is a string rather than an ID (digit)
+        if pk and not pk.isdigit():
+            return get_object_or_404(self.get_queryset(), slug=pk)
+        return super().get_object()
 
 class AssignmentViewSet(viewsets.ModelViewSet):
     queryset = Assignment.objects.all()
@@ -269,16 +320,23 @@ class DashboardStatsView(APIView):
         if user.user_type != 'admin' and not user.is_staff:
             return Response({'error': 'Unauthorized'}, status=403)
 
-        total_students = CustomUser.objects.filter(user_type='student').count()
-        total_teachers = CustomUser.objects.filter(user_type='teacher').count()
-        total_courses = Course.objects.count()
-        
-        recent_users = CustomUser.objects.order_by('-date_joined')[:5]
-        recent_users_data = CustomUserSerializer(recent_users, many=True).data
+        cache_key = 'admin_dashboard_stats'
+        stats_data = cache.get(cache_key)
 
-        return Response({
-            'total_students': total_students,
-            'total_teachers': total_teachers,
-            'total_courses': total_courses,
-            'recent_users': recent_users_data
-        })
+        if not stats_data:
+            total_students = CustomUser.objects.filter(user_type='student').count()
+            total_teachers = CustomUser.objects.filter(user_type='teacher').count()
+            total_courses = Course.objects.count()
+            
+            recent_users = CustomUser.objects.order_by('-date_joined')[:5]
+            recent_users_data = CustomUserSerializer(recent_users, many=True).data
+
+            stats_data = {
+                'total_students': total_students,
+                'total_teachers': total_teachers,
+                'total_courses': total_courses,
+                'recent_users': recent_users_data
+            }
+            cache.set(cache_key, stats_data, timeout=60 * 5)  # Cache for 5 minutes
+
+        return Response(stats_data)

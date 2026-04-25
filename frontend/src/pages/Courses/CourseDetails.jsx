@@ -1,12 +1,30 @@
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import coursesData from "../../data/courses-data.json";
 import { FaCheckCircle } from "react-icons/fa";
+import { getCourse } from "../../services/api"; // You will need to create this in your api.js
 import "./CourseDetails.css";
 
 const CourseDetails = () => {
   const { slug } = useParams();
-  const course = coursesData.find((c) => c.slug === slug);
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchCourseDetail = async () => {
+      try {
+        setLoading(true);
+        const response = await getCourse(slug);
+        setCourse(response.data);
+      } catch (error) {
+        console.error("Error fetching course details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCourseDetail();
+  }, [slug]);
+
+  if (loading) return <h2 style={{ textAlign: "center", padding: "50px" }}>Loading course details...</h2>;
   if (!course) return <h2 className="not-found">Course not found</h2>;
 
   return (

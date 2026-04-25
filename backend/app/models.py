@@ -11,6 +11,13 @@ class CustomUser(AbstractUser):
 
 class Course(models.Model):
     title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, null=True, blank=True)
+    subtitle = models.TextField(blank=True, null=True)
+    category = models.CharField(max_length=100, blank=True, null=True)
+    icon = models.CharField(max_length=50, blank=True, null=True, help_text="React icon name, e.g. FaAtom")
+    gradient = models.CharField(max_length=255, blank=True, null=True, help_text="CSS gradient, e.g. linear-gradient(...)")
+    features = models.JSONField(default=list, blank=True, help_text="List of feature strings")
+    syllabus = models.JSONField(default=list, blank=True, help_text="List of module objects with topics")
     description = models.TextField()
     teacher = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='courses_taught', limit_choices_to={'user_type': 'teacher'})
     students = models.ManyToManyField(CustomUser, related_name='courses_enrolled', limit_choices_to={'user_type': 'student'}, blank=True)

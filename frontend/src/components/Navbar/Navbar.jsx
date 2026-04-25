@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -9,7 +9,12 @@ import NotificationSidebar from "../NotificationSidebar/NotificationSidebar";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { user, logout } = useAuth();
+  const menuRef = useRef(null);
+  const menuIconRef = useRef(null);
+  const notificationIconRef = useRef(null);
+  const notificationSidebarRef = useRef(null);
 
   // Mock notifications state lifted from Sidebar
   const [notifications, setNotifications] = useState([
@@ -41,9 +46,59 @@ const Navbar = () => {
     setNotifications(prev => prev.filter(n => n.id !== id));
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 15) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Handle click outside to close the mobile menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Close mobile menu
+      if (
+        menuOpen &&
+        menuRef.current && !menuRef.current.contains(event.target) &&
+        menuIconRef.current && !menuIconRef.current.contains(event.target)
+      ) {
+        setMenuOpen(false);
+      }
+
+      // Close notification sidebar
+      if (
+        showNotifications &&
+        notificationSidebarRef.current && !notificationSidebarRef.current.contains(event.target) &&
+        notificationIconRef.current && !notificationIconRef.current.contains(event.target)
+      ) {
+        setShowNotifications(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [menuOpen, showNotifications]);
+
+  // Prevent body scrolling when an overlay is open
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    if (menuOpen || showNotifications) {
+      htmlElement.style.overflow = 'hidden';
+    } else {
+      htmlElement.style.overflow = '';
+    }
+    return () => {
+      htmlElement.style.overflow = '';
+    };
+  }, [menuOpen, showNotifications]);
+
   return (
     <>
-      <nav className="navbar">
+      <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
         <div className="nav-container">
 
           {/* Left Logo */}
@@ -81,6 +136,7 @@ const Navbar = () => {
             {user && (
               <div
                 className="notification-icon-wrapper"
+                ref={notificationIconRef}
                 onClick={() => setShowNotifications(true)}
                 style={{ cursor: 'pointer', marginRight: '15px', display: 'flex', alignItems: 'center', position: 'relative' }}
               >
@@ -101,7 +157,7 @@ const Navbar = () => {
             )}
 
             {/* Hamburger */}
-            <div className="menu-icon" onClick={() => setMenuOpen(true)}>
+            <div className="menu-icon" ref={menuIconRef} onClick={() => setMenuOpen(true)}>
               ☰
             </div>
           </div>
@@ -109,17 +165,31 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Notification Sidebar */}
-      <NotificationSidebar
-        isOpen={showNotifications}
-        onClose={() => setShowNotifications(false)}
-        notifications={notifications}
-        onClearAll={clearAllNotifications}
-        onRemove={removeNotification}
-      />
+      {/* Shared Dark Overlay for Menu and Notifications */}
+      <div 
+        className={`menu-overlay ${menuOpen || showNotifications ? "open" : ""}`} 
+        onClick={() => {
+          setMenuOpen(false);
+          setShowNotifications(false);
+        }}
+      ></div>
+
+      {/* Notification Sidebar Wrapper */}
+      <div 
+        ref={notificationSidebarRef} 
+        className={`notification-wrapper ${showNotifications ? "open" : ""}`}
+      >
+        <NotificationSidebar
+          isOpen={showNotifications}
+          onClose={() => setShowNotifications(false)}
+          notifications={notifications}
+          onClearAll={clearAllNotifications}
+          onRemove={removeNotification}
+        />
+      </div>
 
       {/* Mobile Menu */}
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`} ref={menuRef}>
         <div className="close-btn" onClick={() => setMenuOpen(false)}>×</div>
 
         <Link onClick={() => setMenuOpen(false)} to="/">Home</Link>
@@ -140,10 +210,10 @@ const Navbar = () => {
                 <span style={{ marginLeft: '10px', background: 'red', color: 'white', borderRadius: '50%', padding: '2px 8px', fontSize: '0.8rem' }}>{notifications.length}</span>
               )}
             </div>
-            <Link onClick={() => { logout(); setMenuOpen(false); }} to="/login">Logout</Link>
+            <Link className="login-btn" onClick={() => { logout(); setMenuOpen(false); }} to="/login">Logout</Link>
           </>
         ) : (
-          <Link onClick={() => setMenuOpen(false)} to="/login">Login</Link>
+          <Link className="login-btn" onClick={() => setMenuOpen(false)} to="/login">Login</Link>
         )}
       </div>
     </>

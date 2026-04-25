@@ -24,6 +24,10 @@ export const getCourses = () => {
   return apiClient.get('/courses/');
 };
 
+export const getCourse = (slug) => {
+  return apiClient.get(`/courses/${slug}/`);
+};
+
 export const login = (username, password) => {
   return apiClient.post('/token/', { username, password });
 };

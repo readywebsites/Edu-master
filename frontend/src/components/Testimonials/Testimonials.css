@@ -1,33 +1,207 @@
-.test-section {
-  padding: 50px 0;
+/* Testimonials Section */
+.testimonials-section {
+  padding: 5rem 10%; /* Consistent with Highlights.css */
+  background: #f8fafc; /* Soft, modern background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font */
+  max-width: 1200px; /* Limit width for larger screens */
+  margin: 0 auto;
 }
 
-.test-title {
+/* Section Header */
+.testimonials-header {
   text-align: center;
-  font-size: 26px;
-  font-weight: 800;
-  margin-bottom: 25px;
+  margin-bottom: 3.5rem; /* Consistent with Highlights.css */
 }
 
-.test-container {
-  width: 90%;
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  gap: 25px;
-}
-
-.test-card {
-  flex: 1;
-  background: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-}
-.rank {
-  color: #ff7a00;
+/* Header Title */
+.testimonials-header h2 {
+  font-size: 2.5rem; /* Consistent with Highlights.css */
+  color: #1e293b; /* Dark text for contrast */
+  margin-bottom: 0.5rem;
   font-weight: 700;
 }
-.review {
-  color: #555;
+
+/* Header Subtitle */
+.testimonials-header p {
+  font-size: 1.1rem; /* Consistent with Highlights.css */
+  color: #64748b; /* Muted text for description */
+  margin: 0;
+}
+
+/* Wrapper to position relative arrows */
+.testimonials-slider-container {
+  position: relative;
+}
+
+/* Testimonials Grid (Static Grid Layout) */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+  gap: 2.5rem; /* Spacing between cards */
+  margin-top: 2rem;
+}
+
+/* Individual Testimonial Card */
+.testimonial-card {
+  background: #ffffff;
+  padding: 2.5rem 2rem; /* Generous padding */
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes profile to bottom */
+  min-height: 250px; /* Ensure consistent card height */
+  position: relative; /* For positioning quote icon */
+  overflow: hidden; /* Ensure quote icon doesn't overflow */
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px); /* Lift-up effect on hover */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-top: 4px solid #ff8514; /* Eye-catching top border on hover */
+}
+
+/* Quote Icon Styling */
+.quote-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 3.5rem;
+  color: #f0f4f8; /* Light, subtle color */
+  opacity: 0.8;
+  z-index: 0; /* Ensure it stays behind text */
+}
+
+/* Review Text */
+.review-text {
+  font-size: 1.05rem;
+  color: #475569; /* Muted text color */
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  z-index: 1; /* Ensure text is above quote icon */
+}
+
+/* Star Rating */
+.rating-stars {
+  color: #ff8514; /* Accent color for stars */
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.rating-stars .star-icon {
+  margin-right: 3px; /* Spacing between stars */
+}
+
+/* Student Profile Area */
+.student-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto; /* Pushes profile to the bottom of the card */
+}
+
+/* Student Avatar */
+.student-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Circular avatar */
+  object-fit: cover;
+  border: 2px solid #ff8514; /* Accent border */
+}
+
+/* Student Info (Name and Rank) */
+.student-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+.student-rank {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Custom Carousel Arrows */
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  cursor: pointer;
+  background: #ffffff;
+  color: #ff8514;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.custom-arrow:hover {
+  background: #ff8514;
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.custom-prev { left: -20px; }
+.custom-next { right: -20px; }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .testimonials-section {
+    padding: 3rem 5%; /* Less padding on smaller screens */
+  }
+  .testimonials-header h2 {
+    font-size: 2rem;
+  }
+  .testimonials-header p {
+    font-size: 1rem;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 2rem;
+  }
+  .testimonial-card {
+    padding: 2rem 1.5rem;
+  }
+  .quote-icon {
+    font-size: 3rem;
+    top: 1rem;
+    right: 1rem;
+  }
+  .review-text {
+    font-size: 1rem;
+  }
+  .student-avatar {
+    width: 45px;
+    height: 45px;
+  }
+  .student-name {
+    font-size: 1rem;
+  }
+  .student-rank {
+    font-size: 0.85rem;
+  }
+  .custom-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  .custom-prev { left: -10px; }
+  .custom-next { right: -10px; }
+}
+
+@media (max-width: 480px) {
+  .testimonials-section {
+    padding: 2rem 4%;
+  }
+  .testimonials-header h2 {
+    font-size: 1.8rem;
+  }
 }
