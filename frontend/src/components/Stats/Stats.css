@@ -15,6 +15,39 @@
   gap: 30px;
 }
 
+/* COLOR THEMES FOR EACH CARD */
+.stats-grid > div:nth-child(1) {
+  --theme-color: #ff7a00;
+  --theme-light: #fff4ea;
+  --theme-color-rgb: 255, 122, 0;
+  --theme-gradient: linear-gradient(90deg, #ff7a00, #ff9d42);
+  --theme-text-gradient: linear-gradient(90deg, #ff9d42, #ff6a00);
+}
+
+.stats-grid > div:nth-child(2) {
+  --theme-color: #007bff;
+  --theme-light: #e6f2ff;
+  --theme-color-rgb: 0, 123, 255;
+  --theme-gradient: linear-gradient(90deg, #007bff, #4da3ff);
+  --theme-text-gradient: linear-gradient(90deg, #4da3ff, #0056b3);
+}
+
+.stats-grid > div:nth-child(3) {
+  --theme-color: #28a745;
+  --theme-light: #e9f7ef;
+  --theme-color-rgb: 40, 167, 69;
+  --theme-gradient: linear-gradient(90deg, #28a745, #5cd67a);
+  --theme-text-gradient: linear-gradient(90deg, #5cd67a, #1e7e34);
+}
+
+.stats-grid > div:nth-child(4) {
+  --theme-color: #9c27b0;
+  --theme-light: #f5e6f7;
+  --theme-color-rgb: 156, 39, 176;
+  --theme-gradient: linear-gradient(90deg, #9c27b0, #c355d6);
+  --theme-text-gradient: linear-gradient(90deg, #c355d6, #7b1fa2);
+}
+
 /* CARD */
 .stat-card {
   background: #ffffff;
@@ -22,10 +55,11 @@
   text-align: center;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
   position: relative;
   /* Removed overflow: hidden so the glow can expand gracefully */
   border: 1px solid #f0f0f0;
+  transform-style: preserve-3d; /* For 3D effect layering */
 }
 
 .stat-card::before {
@@ -35,15 +69,14 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, #ff7a00, #ff9d42);
+  background: var(--theme-gradient);
   transform: scaleX(0);
   transition: transform 0.4s ease;
   transform-origin: left;
 }
 
 .stat-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(255, 122, 0, 0.2); /* Enhanced glowing shadow */
+  box-shadow: 0 20px 40px rgba(var(--theme-color-rgb), 0.2); /* Enhanced glowing shadow */
   border-color: transparent;
 }
 
@@ -56,27 +89,34 @@
   width: 80px;
   height: 80px;
   margin: 0 auto 20px;
-  background: rgba(255, 123, 0, 0.774);
+  background: var(--theme-light); /* Theme light background by default */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(var(--theme-color-rgb), 0.1); /* Softer outer glow */
 }
 
 .stat-card:hover .icon-wrapper {
-  background: #ff7a00;
+  background: var(--theme-color); /* Solid theme color on hover */
 }
 
-.stat-icon {
+.stat-card .stat-icon,
+.stat-card .icon-wrapper svg {
   font-size: 36px;
-  color: #ff7a00;
-  transition: all 0.3s ease;
+  color: var(--theme-color); /* Theme color by default */
+  fill: var(--theme-color); /* Ensure SVG path adopts color */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy hover transition */
+  filter: drop-shadow(0 2px 4px rgba(var(--theme-color-rgb), 0.4)); /* Drop shadow by default */
 }
 
-.stat-card:hover .stat-icon {
-  color: #ffffff;
-  transform: scale(1.1);
+.stat-card:hover .stat-icon,
+.stat-card:hover .icon-wrapper svg {
+  color: #ffffff; /* White on hover */
+  fill: #ffffff; /* Ensure SVG path adopts color */
+  transform: scale(1.2); /* Slightly larger scale for better bounce */
+  filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.5)); /* Glow effect on hover */
 }
 
 /* TITLE */
@@ -84,7 +124,7 @@
   font-size: 32px;
   font-weight: 900;
   margin-bottom: 8px;
-  background: linear-gradient(90deg, #ff7a00, #ff4b00); /* Gradient Text */
+  background: var(--theme-text-gradient); /* Theme Gradient Text */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

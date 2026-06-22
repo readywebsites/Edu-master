@@ -19,10 +19,10 @@ const Home = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 900,
+      duration: 1200,
       delay: 100,
       once: true,
-      easing: "ease-out",
+      easing: "ease-in-out-cubic",
     });
   }, []);
 
