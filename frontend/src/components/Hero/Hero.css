@@ -144,15 +144,63 @@
   margin-top: 5px;
 }
 
-/* WAVE */
+/* WAVE SEPARATOR */
 .hero-wave {
   position: absolute;
   left: 0;
-  bottom: -1px;
+  bottom: 0;
   width: 100%;
-  height: 100px;
-  background: #fff;
-  clip-path: path("M0,64L48,53.3C96,43,192,21,288,26.7C384,32,480,64,576,69.3C672,75,768,53,864,58.7C960,64,1056,96,1152,106.7C1248,117,1344,107,1392,101.3L1440,96L1440,160L0,160Z");
+  height: 120px;
+  line-height: 0;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.hero-wave svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Floating micro-animations for back and middle waves */
+@keyframes floatWave1 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes floatWave2 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.hero-wave .wave-back {
+  animation: floatWave1 18s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.hero-wave .wave-middle {
+  animation: floatWave2 14s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Front-most solid wave is static for a clean page transition */
+.hero-wave .wave-front {
+  transform: none;
 }
 
 /* RESPONSIVE */

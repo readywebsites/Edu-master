@@ -1,116 +1,532 @@
 .highlights {
-  padding: 5rem 10%;
-  background: #f8fafc; /* Soft, modern background */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 50px 24px 80px 24px;
+  background: #f4f6fa; /* Merges seamlessly with the Stats section background */
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
 .highlights-container {
-  max-width: 1200px;
+  max-width: 1400px; /* Expanded from 1200px to fill the screen */
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .highlights-header {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 50px;
+}
+
+.highlights-subtitle {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #ff7a00;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 12px;
 }
 
 .highlights-header h2 {
-  font-size: 2.5rem;
+  font-size: 38px;
   color: #1e293b;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
+  font-weight: 800;
+  margin: 0 0 15px 0;
+  line-height: 1.25;
 }
 
 .highlights-header p {
-  font-size: 1.1rem;
+  font-size: 18px;
   color: #64748b;
+  margin: 0;
+  line-height: 1.6;
 }
 
-.highlights-grid {
+/* WINDOWS LIVE TILES GRID */
+.highlights-panels {
   display: grid;
-  grid-template-columns: 1fr; /* Mobile: 1 column */
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr; /* Equal 50/50 split */
+  gap: 24px; /* Tight gap characteristic of Windows Live Tiles */
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-.highlight-card {
+.highlights-left,
+.highlights-right {
+  position: relative;
+  width: 100%;
+}
+
+/* WINDOWS LIVE TILE VIEWPORTS */
+.tile-viewport {
+  width: 100%;
+  height: 460px; /* Substantial height for the tiles */
+  perspective: 1500px; /* Enables 3D flip effects */
+  position: relative;
+  border-radius: 20px; /* Matches face border radius */
+  /* Layered premium shadow: dark tight outer edge + soft wide spreads */
+  box-shadow: 
+    0 0 0 1px rgba(15, 23, 42, 0.08),
+    0 4px 6px -1px rgba(15, 23, 42, 0.12),
+    0 12px 24px -4px rgba(15, 23, 42, 0.08),
+    0 24px 48px -12px rgba(15, 23, 42, 0.06);
+}
+
+/* Temp disappearance (fade & scale) during rotation */
+.tile-viewport.is-animating {
+  animation: tile-flip-fade 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes tile-flip-fade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.93);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.tile-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth Windows Live Tile flip curve */
+}
+
+/* TILE FACES (Front & Back) */
+.tile-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px; /* Modern Windows 11 style rounded tile */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Front Face Default Alignment */
+.tile-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* 1. IMAGE TILE (Horizontal Y-axis Flip) */
+.tile-image-viewport .tile-back {
+  transform: rotateY(180deg);
+}
+
+.tile-image-viewport.flipped .tile-inner {
+  transform: rotateY(180deg);
+}
+
+/* 2. TEXT TILE (Vertical X-axis Flip) */
+.tile-text-viewport .tile-front {
+  transform: rotateX(0deg);
+}
+
+.tile-text-viewport .tile-back {
+  transform: rotateX(180deg);
+}
+
+.tile-text-viewport.flipped .tile-inner {
+  transform: rotateX(180deg);
+}
+
+/* IMAGE FACE SPECIFICS */
+.face-image {
   background: #ffffff;
-  padding: 2.5rem 2rem;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-top: 4px solid transparent;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-/* Lift-up effect on hover */
-.highlight-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  border-top: 4px solid #ff8514; /* Eye-catching top border */
+.highlight-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.icon-wrapper {
+.tile-viewport:hover .highlight-img {
+  transform: scale(1.03);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0) 40%, rgba(30, 41, 59, 0.3) 100%);
+  pointer-events: none;
+}
+
+/* DECORATIVE CORNER ACCENTS (Inside the image) */
+.decor-accent {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-color: #ff7a00;
+  border-style: solid;
+  pointer-events: none;
+  z-index: 3;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.decor-tl {
+  top: 20px;
+  left: 20px;
+  border-width: 3.5px 0 0 3.5px;
+  border-top-left-radius: 8px;
+}
+
+.decor-br {
+  bottom: 20px;
+  right: 20px;
+  border-width: 0 3.5px 3.5px 0;
+  border-bottom-right-radius: 8px;
+}
+
+.tile-face:hover .decor-tl {
+  transform: translate(-4px, -4px);
+}
+
+.tile-face:hover .decor-br {
+  transform: translate(4px, 4px);
+}
+
+/* TEXT FACE SPECIFICS (General) */
+.face-text {
+  padding: 50px; /* Generous padding for the larger tile size */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.06);
+}
+
+/* SPECIFIC SLIDES THEMES (Backgrounds & Custom Typography Colors) */
+
+/* Slide 1: Faculty (Soft Pink Theme) */
+.face-text.face-0 {
+  background: #fff5f6; /* Light Pink background */
+  border: 1px solid rgba(255, 122, 0, 0.12);
+}
+
+.face-text.face-0 h3 {
+  color: #e65100; /* Deep Orange Title */
+}
+
+.face-text.face-0 .text-tag {
+  color: #ff7a00;
+}
+
+.face-text.face-0 .text-num-watermark {
+  color: rgba(255, 122, 0, 0.04);
+}
+
+.face-text.face-0 .highlight-cta-btn {
+  background: linear-gradient(135deg, #ff7a00, #ff9b3b);
+  box-shadow: 0 6px 18px rgba(255, 122, 0, 0.25);
+}
+
+.face-text.face-0 .highlight-cta-btn:hover {
+  box-shadow: 0 10px 25px rgba(255, 122, 0, 0.4);
+}
+
+/* Slide 2: Test Series (Soft Yellow Theme) */
+.face-text.face-1 {
+  background: #fffbeb; /* Light Yellow background */
+  border: 1px solid rgba(46, 125, 50, 0.12);
+}
+
+.face-text.face-1 h3 {
+  color: #2e7d32; /* Deep Green Title */
+}
+
+.face-text.face-1 .text-tag {
+  color: #2e7d32;
+}
+
+.face-text.face-1 .text-num-watermark {
+  color: rgba(46, 125, 50, 0.04);
+}
+
+.face-text.face-1 .highlight-cta-btn {
+  background: linear-gradient(135deg, #2e7d32, #4caf50);
+  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.25);
+}
+
+.face-text.face-1 .highlight-cta-btn:hover {
+  box-shadow: 0 10px 25px rgba(46, 125, 50, 0.4);
+}
+
+/* Slide 3: Study Material (Soft Blue Theme) */
+.face-text.face-2 {
+  background: #f0f7ff; /* Light Blue background */
+  border: 1px solid rgba(106, 27, 154, 0.12);
+}
+
+.face-text.face-2 h3 {
+  color: #6a1b9a; /* Deep Violet/Purple Title */
+}
+
+.face-text.face-2 .text-tag {
+  color: #6a1b9a;
+}
+
+.face-text.face-2 .text-num-watermark {
+  color: rgba(106, 27, 154, 0.04);
+}
+
+.face-text.face-2 .highlight-cta-btn {
+  background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+  box-shadow: 0 6px 18px rgba(106, 27, 154, 0.25);
+}
+
+.face-text.face-2 .highlight-cta-btn:hover {
+  box-shadow: 0 10px 25px rgba(106, 27, 154, 0.4);
+}
+
+/* TEXT DETAILS */
+.text-num-watermark {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 9rem;
+  position: absolute;
+  right: 45px;
+  top: 15px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.text-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.face-text h3 {
+  font-family: 'Cambria', 'Georgia', serif; /* Scholarly calligraphy style */
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+  line-height: 1.2;
+}
+
+.text-description {
+  font-size: 16.5px;
+  color: #55667d;
+  line-height: 1.8;
+  margin: 0 0 24px 0;
+}
+
+/* CTA BUTTON GENERAL */
+.highlight-cta-btn {
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   display: inline-flex;
   align-items: center;
+  gap: 8px;
+}
+
+.highlight-cta-btn:hover {
+  transform: translateY(-2.5px);
+}
+
+.highlight-cta-btn .arrow {
+  transition: transform 0.3s ease;
+}
+
+.highlight-cta-btn:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* CENTERED TABS WITH PROGRESS FILLS */
+.highlights-nav-tabs {
+  display: flex;
+  gap: 30px;
+  margin: 45px auto 0 auto;
+  max-width: 800px;
+  width: 100%;
   justify-content: center;
-  width: 72px;
-  height: 72px;
-  background: #eff6ff;
-  color: #ff8514;
-  border-radius: 50%;
-  margin-bottom: 1.5rem;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box;
 }
 
-.highlight-icon {
-  font-size: 2.2rem;
+.nav-tab-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: transparent;
+  border: none;
+  padding: 12px 0;
+  cursor: pointer;
+  text-align: left;
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
 }
 
-.highlight-card:hover .icon-wrapper {
-  background: #ff8514;
-  color: #ffffff;
-  transform: scale(1.1);
+.nav-tab-btn.active {
+  opacity: 1;
 }
 
-.highlight-card h3 {
-  font-size: 1.3rem;
-  color: #0f172a;
-  margin-bottom: 1rem;
-  font-weight: 600;
+.tab-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ff7a00;
+  margin-bottom: 5px;
 }
 
-.highlight-card p {
-  font-size: 1rem;
-  color: #475569;
-  line-height: 1.6;
-  margin: 0;
+.tab-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 10px;
 }
 
-/* Tablet screens */
-@media (min-width: 768px) {
-  .highlights-grid {
-    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
-  }
-
-  /* Elegantly center the 3rd card on 2-column displays */
-  .card-3 {
-    grid-column: 1 / -1; 
-    justify-self: center;
-    /* 50% width minus half of the 2rem grid gap ensures it perfectly matches the cards above it */
-    width: calc(50% - 1rem); 
-  }
+.tab-progress-bg {
+  width: 100%;
+  height: 3px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Desktop screens */
-@media (min-width: 1024px) {
-  .highlights-grid {
-    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+.tab-progress-fill {
+  height: 100%;
+  background: #ff7a00;
+  width: 0%;
+}
+
+/* LAPTOP VIEWPORTS */
+@media (max-width: 1200px) {
+  .highlights-container {
+    max-width: 1000px;
   }
   
-  /* Reset the 3rd card back to normal flow on desktop */
-  .card-3 {
-    grid-column: auto;
-    justify-self: stretch;
-    width: auto;
+  .tile-viewport {
+    height: 420px;
+  }
+
+  .face-text {
+    padding: 35px;
+  }
+
+  .face-text h3 {
+    font-size: 28px;
+  }
+
+  .text-description {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+/* TABLET VIEWPORTS (Stacking image and text panels) */
+@media (max-width: 768px) {
+  .highlights {
+    padding: 30px 20px 60px 20px;
+  }
+
+  .highlights-panels {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    justify-items: center;
+  }
+
+  .tile-viewport {
+    height: 360px;
+    max-width: 560px;
+  }
+
+  .face-text {
+    padding: 35px;
+  }
+
+  .decor-accent {
+    display: none;
+  }
+
+  .highlights-nav-tabs {
+    margin-top: 30px;
+    gap: 15px;
+  }
+}
+
+/* MOBILE VIEWPORTS */
+@media (max-width: 480px) {
+  .highlights {
+    padding: 25px 15px 50px 15px;
+  }
+
+  .highlights-header h2 {
+    font-size: 28px;
+  }
+
+  .highlights-header p {
+    font-size: 15px;
+  }
+
+  .tile-viewport {
+    height: 280px;
+  }
+
+  .tile-text-viewport {
+    height: 380px;
+  }
+
+  .face-text {
+    padding: 24px;
+  }
+
+  .face-text h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .text-description {
+    font-size: 13.5px;
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+
+  .text-num-watermark {
+    font-size: 4.5rem;
+    right: 20px;
+    top: 5px;
+  }
+
+  .tab-title {
+    font-size: 12px;
+  }
+
+  .tab-num {
+    font-size: 11px;
+  }
+
+  .highlight-cta-btn {
+    padding: 10px 24px;
+    font-size: 14px;
   }
 }
