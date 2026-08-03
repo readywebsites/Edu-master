@@ -3,117 +3,199 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 35px;
+  gap: 24px; /* Matches highlights gap */
 }
 
-/* CARD */
+/* WINDOWS-STYLE CATEGORY CARD */
 .category-card {
   background: #ffffff;
-  border-radius: 22px;
-  padding: 32px;
+  border-radius: 20px;
+  padding: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
-  border: 1px solid #e6e6e6;
   overflow: hidden;
-  transition: 0.25s ease;
-  min-height: 180px;
+  box-sizing: border-box;
+  
+  /* Layered premium outer shadow */
+  box-shadow: 
+    0 0 0 1px rgba(15, 23, 42, 0.06),
+    0 4px 6px -1px rgba(15, 23, 42, 0.08),
+    0 12px 24px -4px rgba(15, 23, 42, 0.04);
+  
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  min-height: 220px;
 }
 
-/* Hover */
+/* Hover: Float & Depth */
 .category-card:hover {
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.08);
-  transform: translateY(-4px);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 
+    0 0 0 1px rgba(15, 23, 42, 0.08),
+    0 12px 24px -4px rgba(15, 23, 42, 0.12),
+    0 24px 48px -12px rgba(15, 23, 42, 0.08);
 }
 
 /* LEFT CONTENT */
-.category-left h2 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 18px;
-  color: #1c1c1c;
+.category-left {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
 }
 
+/* Scholarly Headings with theme mapping */
+.category-left h2 {
+  font-family: 'Cambria', 'Georgia', serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.category-card:nth-child(1) h2 {
+  color: #cc2d5a; /* NEET Deep Pink */
+}
+
+.category-card:nth-child(2) h2 {
+  color: #ff7a00; /* JEE Deep Orange */
+}
+
+/* TAGS PILLS */
 .category-tags {
   display: flex;
-  gap: 12px;
-  margin-bottom: 22px;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .category-tag {
-  padding: 7px 20px;
-  font-size: 14px;
-  border-radius: 40px;
-  background: #f8f8f8;
-  border: 1px solid #ddd;
-  color: #333;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 30px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  color: #475569;
+  text-transform: capitalize;
 }
 
-/* BUTTON */
+/* THEMED ACTION BUTTONS */
 .category-btn {
-  padding: 10px 22px;
-  border-radius: 40px;
-  background: #ff7d00;
-  color: #fff;
+  padding: 12px 28px;
+  border-radius: 30px;
+  color: #ffffff;
   border: none;
   font-weight: 600;
+  font-size: 14.5px;
   cursor: pointer;
-  transition: 0.25s;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.category-btn:hover {
-  background: #e56f00;
+/* NEET Button Theme */
+.category-card:nth-child(1) .category-btn {
+  background: linear-gradient(135deg, #cc2d5a, #f06292);
+  box-shadow: 0 4px 12px rgba(204, 45, 90, 0.25);
 }
 
-/* RIGHT ICON ARC */
+.category-card:nth-child(1) .category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(204, 45, 90, 0.4);
+}
+
+/* JEE Button Theme */
+.category-card:nth-child(2) .category-btn {
+  background: linear-gradient(135deg, #ff7a00, #ff9b3b);
+  box-shadow: 0 4px 12px rgba(255, 122, 0, 0.25);
+}
+
+.category-card:nth-child(2) .category-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 122, 0, 0.4);
+}
+
+/* RIGHT ICON BLOCK */
 .category-right {
   position: absolute;
-  right: -5px;
+  right: -10px;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 1;
 }
 
+/* Circular soft backdrops */
 .category-bg {
-  width: 150px;
-  height: 150px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.category-bg img {
-  width: 75px;
-  height: 75px;
-  opacity: 0.9;
+.category-card:hover .category-bg {
+  transform: scale(1.05) rotate(5deg);
 }
 
-/* COLOR THEMES */
 .neet-bg {
-  background: #ffe1e7;
+  background: #fff0f3; /* Soft Pink backdrop */
+  border: 1px solid rgba(204, 45, 90, 0.08);
 }
 
 .jee-bg {
-  background: #fff1d6;
+  background: #fff8eb; /* Soft Orange backdrop */
+  border: 1px solid rgba(255, 122, 0, 0.08);
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE LAYOUTS */
 @media (max-width: 900px) {
   .categories-container {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .category-card {
-    padding: 26px;
+    padding: 30px;
+    min-height: 200px;
   }
 
   .category-bg {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
   }
 
-  .category-bg img {
-    width: 60px;
+  .category-left h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    min-height: auto;
+  }
+
+  .category-left {
+    width: 100%;
+  }
+
+  .category-right {
+    position: relative;
+    right: 0;
+    top: 0;
+    transform: none;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .category-bg {
+    width: 90px;
+    height: 90px;
   }
 }
